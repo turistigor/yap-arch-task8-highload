@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: scaletest-ser-mon
+  namespace: highload
+spec:
+  selector:
+    matchLabels:
+      app: scaletest-service
+  endpoints:
+  - port: metrics
+    path: /metrics
+    interval: 10s
+    targetPort: 8080
