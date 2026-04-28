@@ -60,7 +60,7 @@ echo "K8s cluster is ready!"
 python3 -m venv ../../.venv
 source ../../.venv/bin/activate
 echo "Python dependencies installation..."
-if pip install -r ../requirements.txt -q;
+if pip install -r ../../requirements.txt -q;
 then
     echo -e "Dependencies installation: SUCCESS\n"
 else
