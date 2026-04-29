@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  nginx-rate-limiter:
+    image: nginx:alpine
+    container_name: nginx-rate-limiter
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    command: ["nginx", "-g", "daemon off;"]
+    networks:
+      - rate-limiting-network
+    depends_on:
+      server-mock:
+        condition: service_started
+
+  server-mock:
+    image: nginx:alpine
+    container_name: mock-backend
+    expose:
+      - "80"
+    networks:
+      - rate-limiting-network
+
+networks:
+  rate-limiting-network:
+    name: rate-limiting-network
+    driver: bridge
