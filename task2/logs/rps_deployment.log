@@ -1,0 +1,47 @@
+Name:                   scaletest-deployment
+Namespace:              highload
+CreationTimestamp:      Sat, 25 Apr 2026 22:23:44 +0300
+Labels:                 <none>
+Annotations:            deployment.kubernetes.io/revision: 1
+Selector:               app=scaletest-pod
+Replicas:               1 desired | 1 updated | 1 total | 1 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:       app=scaletest-pod
+  Annotations:  prometheus.io/path: /metrics
+                prometheus.io/port: 8080
+                prometheus.io/scrape: true
+  Containers:
+   scale-test-app:
+    Image:      ghcr.io/yandex-practicum/scaletestapp
+    Port:       8080/TCP
+    Host Port:  0/TCP
+    Limits:
+      cpu:     500m
+      memory:  60Mi
+    Requests:
+      cpu:         500m
+      memory:      30Mi
+    Environment:   <none>
+    Mounts:        <none>
+  Volumes:         <none>
+  Node-Selectors:  <none>
+  Tolerations:     <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Progressing    True    NewReplicaSetAvailable
+  Available      True    MinimumReplicasAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   scaletest-deployment-57bf96c579 (1/1 replicas created)
+Events:
+  Type    Reason             Age    From                   Message
+  ----    ------             ----   ----                   -------
+  Normal  ScalingReplicaSet  20m    deployment-controller  Scaled up replica set scaletest-deployment-57bf96c579 from 0 to 1
+  Normal  ScalingReplicaSet  13m    deployment-controller  Scaled up replica set scaletest-deployment-57bf96c579 from 1 to 4
+  Normal  ScalingReplicaSet  12m    deployment-controller  Scaled up replica set scaletest-deployment-57bf96c579 from 4 to 6
+  Normal  ScalingReplicaSet  4m58s  deployment-controller  Scaled down replica set scaletest-deployment-57bf96c579 from 6 to 5
+  Normal  ScalingReplicaSet  4m28s  deployment-controller  Scaled down replica set scaletest-deployment-57bf96c579 from 5 to 3
+  Normal  ScalingReplicaSet  4m13s  deployment-controller  Scaled down replica set scaletest-deployment-57bf96c579 from 3 to 1

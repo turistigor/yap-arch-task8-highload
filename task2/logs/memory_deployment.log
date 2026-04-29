@@ -1,0 +1,47 @@
+Name:                   scaletest-deployment
+Namespace:              highload
+CreationTimestamp:      Sat, 25 Apr 2026 17:28:25 +0300
+Labels:                 <none>
+Annotations:            deployment.kubernetes.io/revision: 1
+Selector:               app=scaletest-pod
+Replicas:               10 desired | 10 updated | 10 total | 10 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app=scaletest-pod
+  Containers:
+   scale-test-app:
+    Image:      ghcr.io/yandex-practicum/scaletestapp
+    Port:       8080/TCP
+    Host Port:  0/TCP
+    Limits:
+      cpu:     500m
+      memory:  60Mi
+    Requests:
+      cpu:         500m
+      memory:      30Mi
+    Environment:   <none>
+    Mounts:        <none>
+  Volumes:         <none>
+  Node-Selectors:  <none>
+  Tolerations:     <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Progressing    True    NewReplicaSetAvailable
+  Available      True    MinimumReplicasAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   scaletest-deployment-796fd45fb7 (10/10 replicas created)
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  59m   deployment-controller  Scaled up replica set scaletest-deployment-796fd45fb7 from 0 to 1
+  Normal  ScalingReplicaSet  52m   deployment-controller  Scaled up replica set scaletest-deployment-796fd45fb7 from 1 to 2
+  Normal  ScalingReplicaSet  50m   deployment-controller  Scaled up replica set scaletest-deployment-796fd45fb7 from 2 to 3
+  Normal  ScalingReplicaSet  49m   deployment-controller  Scaled up replica set scaletest-deployment-796fd45fb7 from 3 to 4
+  Normal  ScalingReplicaSet  48m   deployment-controller  Scaled up replica set scaletest-deployment-796fd45fb7 from 4 to 5
+  Normal  ScalingReplicaSet  46m   deployment-controller  Scaled up replica set scaletest-deployment-796fd45fb7 from 5 to 7
+  Normal  ScalingReplicaSet  44m   deployment-controller  Scaled up replica set scaletest-deployment-796fd45fb7 from 7 to 8
+  Normal  ScalingReplicaSet  42m   deployment-controller  Scaled up replica set scaletest-deployment-796fd45fb7 from 8 to 9
+  Normal  ScalingReplicaSet  38m   deployment-controller  Scaled up replica set scaletest-deployment-796fd45fb7 from 9 to 10

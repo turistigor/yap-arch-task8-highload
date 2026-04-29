@@ -1,0 +1,27 @@
+Name:                                  scaletest-hpa
+Namespace:                             highload
+Labels:                                <none>
+Annotations:                           <none>
+CreationTimestamp:                     Sat, 25 Apr 2026 22:25:57 +0300
+Reference:                             Deployment/scaletest-deployment
+Metrics:                               ( current / target )
+  "http_requests_per_second" on pods:  0 / 10
+Min replicas:                          1
+Max replicas:                          10
+Deployment pods:                       1 current / 1 desired
+Conditions:
+  Type            Status  Reason            Message
+  ----            ------  ------            -------
+  AbleToScale     True    ReadyForNewScale  recommended size matches current size
+  ScalingActive   True    ValidMetricFound  the HPA was able to successfully calculate a replica count from pods metric http_requests_per_second
+  ScalingLimited  True    TooFewReplicas    the desired replica count is less than the minimum replica count
+Events:
+  Type     Reason                        Age    From                       Message
+  ----     ------                        ----   ----                       -------
+  Warning  FailedGetPodsMetric           18m    horizontal-pod-autoscaler  unable to get metric http_requests_per_second: unable to fetch metrics from custom metrics API: the server could not find the metric http_requests_per_second for pods
+  Warning  FailedComputeMetricsReplicas  18m    horizontal-pod-autoscaler  invalid metrics (1 invalid out of 1), first error is: failed to get pods metric value: unable to get metric http_requests_per_second: unable to fetch metrics from custom metrics API: the server could not find the metric http_requests_per_second for pods
+  Normal   SuccessfulRescale             13m    horizontal-pod-autoscaler  New size: 4; reason: pods metric http_requests_per_second above target
+  Normal   SuccessfulRescale             13m    horizontal-pod-autoscaler  New size: 6; reason: pods metric http_requests_per_second above target
+  Normal   SuccessfulRescale             5m10s  horizontal-pod-autoscaler  New size: 5; reason: All metrics below target
+  Normal   SuccessfulRescale             4m40s  horizontal-pod-autoscaler  New size: 3; reason: All metrics below target
+  Normal   SuccessfulRescale             4m25s  horizontal-pod-autoscaler  New size: 1; reason: All metrics below target
